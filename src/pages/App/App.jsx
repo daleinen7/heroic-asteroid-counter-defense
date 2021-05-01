@@ -12,10 +12,12 @@ import NavBar from '../../components/NavBar';
 function App() {
   
   const Main = styled.main`
-    background-color: gray;
+    
   `;
 
   const [user, setUser] = useState(null);
+  const [gamePlay, setGamePlay] = useState(false);
+  const [sound, setSound] = useState(true);
 
   return (
     <Main className="App">

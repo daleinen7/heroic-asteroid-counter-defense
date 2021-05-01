@@ -1,6 +1,7 @@
 body {
   margin: 0;
   box-sizing: border-box;
-  background: gray;
+  background: rgb(60, 75, 94);
+  background-image: url('spacebg.gif');
   color: white;
 }
