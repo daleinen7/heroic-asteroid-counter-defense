@@ -9,7 +9,7 @@ export default function Space() {
   `;
   return(
     <StyledDiv>
-      Space
+      
     </StyledDiv>
   )
 }

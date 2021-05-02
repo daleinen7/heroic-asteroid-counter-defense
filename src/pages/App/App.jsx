@@ -7,7 +7,7 @@ import Auth from '../Auth';
 import Game from '../Game';
 import GameCreate from '../GameCreate';
 import GameSelect from '../GameSelect';
-import NavBar from '../../components/NavBar';
+import Header from '../../components/Header';
 
 function App() {
   
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <Main className="App">
-      <NavBar/>
+      <Header/>
       <Switch>
         <Route path="/profile">
           <Profile/>
