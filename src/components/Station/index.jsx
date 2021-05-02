@@ -1,4 +1,5 @@
 
+import CodeInput from '../CodeInput';
 import styled from 'styled-components';
 
 export default function Station(props) {
@@ -10,6 +11,14 @@ export default function Station(props) {
     justify-content: flex-end;
     background: rgb(101, 104, 113);
     z-index: -1;
+  `;
+
+  const StationSide = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
   `;
 
   const StationFront = styled.div`
@@ -55,6 +64,11 @@ export default function Station(props) {
 
   return(
     <StyledDiv>
+      <StationSide>
+        <CodeInput/>
+        <CodeInput/>
+        <CodeInput/>
+      </StationSide>
       <StationFront>
         <LaserPort>
           <LaserBeam style={ props.firing && props.focused === 0 ? {display: "block"} : {display:"none"}}/>
