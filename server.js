@@ -24,7 +24,7 @@ app.listen(port, function() {
 });
 
 // API Routes
-
+app.use('/api/users', require('./routes/api/users'));
 
 // Catch-all Route
 app.get('/*', function(req,res) {

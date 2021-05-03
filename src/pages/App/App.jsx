@@ -31,7 +31,7 @@ function App() {
         <Route path="/select">
           <GameSelect/>
         </Route>
-        <Route path="/login">
+        <Route path="/auth">
           <Auth/>
         </Route>
         <Route path="/">

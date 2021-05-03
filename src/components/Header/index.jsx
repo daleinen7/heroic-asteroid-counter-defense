@@ -60,8 +60,11 @@ export default function Header(props) {
       </ShieldDisplay>
 
       <StyledNav>
-        <Link className="nav-link" to='auth'>Login</Link>
-        <Link className="nav-link" to='select'>Select Game</Link>
+        {props.user && 
+          <Link className='nav-link' to='Profile'>User Games</Link>
+        }
+        <Link className='nav-link' to='auth'>Signup/Login</Link>
+        <Link className='nav-link' to='select'>Select Game</Link>
       </StyledNav>
     </StyledDiv>
   )

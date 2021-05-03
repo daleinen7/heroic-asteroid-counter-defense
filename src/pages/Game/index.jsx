@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Space from '../../components/Space';
 import Station from '../../components/Station';
 
@@ -21,7 +21,25 @@ export default function Game(props) {
 
   function newGame() {
     setGameState('playing')
+    setAstroCount(0);
+    setFocused(0);
+    setAsteroids([]);
+    setShields(0.9);
   }
+
+  // Animate Asteroid
+
+  // Create Asteroid
+
+  // Play Sound
+
+  // Fire Laser
+
+  // Handle Focus
+
+  // Add Event Listener Keydown
+
+  // Handle Clear Interval and Animation
 
   return(
     <StyledDiv>
