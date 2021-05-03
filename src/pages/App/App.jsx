@@ -16,7 +16,6 @@ function App() {
   `;
 
   const [user, setUser] = useState(null);
-  const [gamePlay, setGamePlay] = useState(false);
   const [sound, setSound] = useState(true);
 
   return (
