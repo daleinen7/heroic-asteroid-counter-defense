@@ -1,39 +1,44 @@
 import styled from 'styled-components';
 
+const StyledDiv = styled.div`
+  width: 70%;
+  background: none;
+`;
+
+const StatusScreen = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -150px;
+  background-color: rgba(122, 146, 180, 0.8);
+  border-radius: 4px;
+  h2 {
+    font-size: 2rem;
+    margin-top: 0;
+  }
+  button {
+    background: rgba(94, 179, 244, 0.9);
+    width: 80%;
+    font-size: 1.4rem;
+    color: white;
+    font-weight: bold;
+    padding: 17px;
+    text-align: center;
+    border-radius: 4px;
+  }
+`;
 
 export default function Space(props) {
 
-  const StyledDiv = styled.div`
-    width: 70%;
-    background: none;
-  `;
+  
 
-  const StatusScreen = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-top: -150px;
-    background-color: rgba(122, 146, 180, 0.8);
-    border-radius: 4px;
-    h2 {
-      font-size: 2rem;
-      margin-top: 0;
-    }
-    button {
-      background: rgba(94, 179, 244, 0.9);
-      width: 80%;
-      font-size: 1.4rem;
-      color: white;
-      font-weight: bold;
-      padding: 17px;
-      text-align: center;
-      border-radius: 4px;
-    }
-  `;
+  function newGame() {
+    console.log("newgame selected")
+  }
 
   return(
     <StyledDiv>

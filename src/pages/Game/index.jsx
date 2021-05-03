@@ -4,13 +4,13 @@ import Station from '../../components/Station';
 
 import styled from 'styled-components';
 
+const StyledDiv = styled.div`
+  display: flex;
+  height: 90vh;
+`;
+
 export default function Game(props) {
   
-  const StyledDiv = styled.div`
-    display: flex;
-    height: 90vh;
-  `;
-
   // Game State: gameOver, playing, startNewGame
   const [gameState, setGameState] = useState("startNewGame");
 

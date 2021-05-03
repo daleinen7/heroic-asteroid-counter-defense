@@ -9,12 +9,12 @@ import GameCreate from '../GameCreate';
 import GameSelect from '../GameSelect';
 import Header from '../../components/Header';
 
+const Main = styled.main`
+  
+`;
+
 function App() {
   
-  const Main = styled.main`
-    
-  `;
-
   const [user, setUser] = useState(null);
   const [sound, setSound] = useState(true);
 
