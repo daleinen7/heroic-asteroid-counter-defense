@@ -12,12 +12,24 @@ const StyledDiv = styled.div`
 export default function Game(props) {
   
   // Game State: gameOver, playing, startNewGame
-  const [gameState, setGameState] = useState("startNewGame");
+  const [gameState, setGameState] = useState('startNewGame');
+  const [astroCount, setAstroCount] = useState(0);
+  const [focused, setFocused] = useState(0);
+  const [firing, setFiring] = useState(false);
+  const [asteroids, setAsteroids] = useState([]);
+  const [shields, setShields] = useState(0.9);
+
+  function newGame() {
+    setGameState('playing')
+  }
 
   return(
     <StyledDiv>
       <Station/>
-      <Space gameState={gameState}/>
+      <Space 
+        gameState={gameState}
+        newGame={newGame}
+      />
     </StyledDiv>
   )
 }

@@ -16,6 +16,7 @@ const StatusScreen = styled.div`
   margin-top: -150px;
   background-color: rgba(122, 146, 180, 0.8);
   border-radius: 4px;
+  box-shadow: 4px 4px 10px #34353a;
   h2 {
     font-size: 2rem;
     margin-top: 0;
@@ -33,12 +34,6 @@ const StatusScreen = styled.div`
 `;
 
 export default function Space(props) {
-
-  
-
-  function newGame() {
-    console.log("newgame selected")
-  }
 
   return(
     <StyledDiv>
