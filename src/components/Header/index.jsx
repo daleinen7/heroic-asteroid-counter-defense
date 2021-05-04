@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import * as userService from '../../utilities/users-service';
 
 const Title = styled.h1`
   /* font-family: 'Overpass Mono', monospace; */
@@ -52,6 +53,11 @@ const ShieldDisplay = styled.label`
 
 export default function Header(props) {
 
+  function handleLogout() {
+    userService.logout();
+    props.setUser(null)
+  }
+
   return(
     <StyledDiv>
       <Title>Heroic Asteroid Counter Defense</Title>
@@ -60,10 +66,14 @@ export default function Header(props) {
       </ShieldDisplay>
 
       <StyledNav>
-        {props.user && 
+        {props.user ? 
+        <>
           <Link className='nav-link' to='Profile'>User Games</Link>
+          <Link className='nav-link' onClick={handleLogout} to=''>Logout</Link>
+        </>
+          :
+          <Link className='nav-link'  to='auth'>Signup/Login</Link>
         }
-        <Link className='nav-link' to='auth'>Signup/Login</Link>
         <Link className='nav-link' to='select'>Select Game</Link>
       </StyledNav>
     </StyledDiv>

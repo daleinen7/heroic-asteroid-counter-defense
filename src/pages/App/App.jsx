@@ -2,6 +2,7 @@ import {useState} from 'react';
 import './App.css';
 import styled from 'styled-components';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import {getUser} from '../../utilities/users-service';
 import Profile from '../Profile';
 import Auth from '../Auth';
 import Game from '../Game';
@@ -15,12 +16,12 @@ const Main = styled.main`
 
 function App() {
   
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(getUser());
   const [sound, setSound] = useState(true);
 
   return (
     <Main className="App">
-      <Header/>
+      <Header user={user} setUser={setUser}/>
       <Switch>
         <Route path="/profile">
           <Profile/>
@@ -32,7 +33,7 @@ function App() {
           <GameSelect/>
         </Route>
         <Route path="/auth">
-          <Auth/>
+          <Auth setUser={setUser}/>
         </Route>
         <Route path="/">
           <Game/>
