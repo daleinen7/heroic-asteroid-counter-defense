@@ -1,5 +1,6 @@
 import {useState} from 'react';
-import {signUp} from '../../utilities/users-service';
+import {Redirect} from 'react-router-dom';
+import * as userService from '../../utilities/users-service';
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
@@ -11,51 +12,43 @@ const StyledForm = styled.form`
 `;
 
 export default function Login({setUser}) {
-  const [formData, setFormData] = useState({
+  const [credentials, setCredentials] = useState({
     name: '',
     email: '',
     password: '',
-    confirm: '',
-    error: ''
   })
+
+  const [error, setError] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
   
   const handleChange = (e) => {
-    const newFormData = {...formData, [e.target.name]: e.target.value};
-    setFormData(newFormData);
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+    setError('');
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const signUpData = formData;
-      delete signUpData.confirm;
-      delete signUpData.error;
-      const user = await signUp(signUpData);
+      const user = await userService.login(credentials);
       setUser(user);
-      
+      setLoggedIn(true);
     } catch {
-      setFormData({...formData, error: 'An error occured!'})
+      setError('Login Failed - Try Again');
     }
-    setFormData({
-      name: '',
-      email: '',
-      password: '',
-      confirm: '',
-      error: ''
-    })
   }
 
-  return(
-    <StyledForm onSubmit={handleSubmit}>
-      <label htmlFor="name">Name</label>
-      <input type="text" value={formData.name} onChange={handleChange} name='name'/>
-      <label htmlFor="email">Email</label>
-      <input type="text" value={formData.email} onChange={handleChange} name='email'/>
-      <label htmlFor="password">Password</label>
-      <input type="text" value={formData.password} onChange={handleChange} name='password'/>
-      <label htmlFor="confirm">Confirm Password</label>
-      <input type="text" value={formData.confirm} onChange={handleChange} name='confirm'/>
-      <input type="submit" value="Sign Up"/>
-    </StyledForm>
-  )
+  if (loggedIn) {
+    return <Redirect to='/'/>
+  } else {
+    return(
+      <StyledForm onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
+        <input type="text" value={credentials.email} onChange={handleChange} name='email'/>
+        <label htmlFor="password">Password</label>
+        <input type="text" value={credentials.password} onChange={handleChange} name='password'/>
+        <input type="submit" value="Sign Up"/>
+        <p className="error-msg">{error}</p>
+      </StyledForm>
+    )
+  }
 }

@@ -1,5 +1,16 @@
 import * as usersAPI from './users-api';
 
+export async function login(credentials) {
+  try {
+    const token = await usersAPI.login(credentials)
+    // set token
+    localStorage.setItem('token', token)
+    return getUser();
+  } catch {
+    throw new Error('Invalid Login Credentials');
+  }
+}
+
 export async function signUp(userData) {
   try {
     // network request to users-api.js which returns a JWT
