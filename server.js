@@ -25,9 +25,9 @@ app.listen(port, function() {
 
 // API Routes
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/questions', require('./routes/api/questions'));
 
 // Catch-all Route
 app.get('/*', function(req,res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 })
-

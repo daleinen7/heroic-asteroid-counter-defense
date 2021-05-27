@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import './App.css';
-import styled from 'styled-components';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import {getUser} from '../../utilities/users-service';
 import Profile from '../Profile';
@@ -9,6 +8,7 @@ import Game from '../Game';
 import GameCreate from '../GameCreate';
 import GameSelect from '../GameSelect';
 import Header from '../../components/Header';
+import styled from 'styled-components';
 
 const Main = styled.main`
   
@@ -17,6 +17,7 @@ const Main = styled.main`
 function App() {
   
   const [user, setUser] = useState(getUser());
+  const [asteroids, setAsteroids] = useState([]);
   const [sound, setSound] = useState(true);
 
   return (
