@@ -21,6 +21,7 @@ export default function Game(props) {
   const [score, setScore] = useState(0);
 
   function newGame() {
+    console.log("Clickly");
     setAsteroids([]);
     setGameState('playing')
     setFocused(0);
@@ -42,7 +43,6 @@ export default function Game(props) {
     // Create Asteroid
     async function createAsteroid() {
       if (gameState == 'playing') {
-        const newAsteroids = asteroids;
         const question = await questionAPI.getRandom();
         const margin = Math.floor(Math.random() * 40);
         const asteroid = {
@@ -53,10 +53,10 @@ export default function Game(props) {
           score: question.score,
           margin: margin
         }
-        setAsteroids([...newAsteroids, asteroid]);
+        setAsteroids(asteroidState => [...asteroidState, asteroid]);
       }
     }
-  }, [gameState, asteroids])
+  }, [gameState, setAsteroids])
 
   useEffect(()=> {
     const startAnimations = setInterval(()=> {
@@ -66,33 +66,33 @@ export default function Game(props) {
 
     // Animate Asteroid
     function animateAsteroids() {
-      if (gameState == 'playing' && asteroids.length > 0) {
-        console.log("animate asteroid being called");
-        console.log("movi");
-        const newAsteroids = asteroids;
-        const nextAsteroids = newAsteroids.map( asteroid => {
-          // if asteroid collided with station this cycle
-          if (asteroid.progress > 76) {
-            // if there were no shields left and it's game over
-            if (shields <= 0) {
-              gameOver();
+      if (gameState == 'playing') {
+        setAsteroids(a => {
+          const newAsteroids = a;
+          const nextAsteroids = newAsteroids.flatMap( asteroid => {
+            // if asteroid collided with station this cycle
+            if (asteroid.progress > 76) {
+              // if there were no shields left and it's game over
+              if (shields <= 0) {
+                gameOver();
+              } else {
+                // otherwise adjust shields
+                let newShields = shields;
+                setShields((newShields -= 0.3).toFixed(2))
+              }
+              // remove asteroid by not returning it in the map
+              return "";
             } else {
-              // otherwise adjust shields
-              let newShields = shields;
-              setShields((newShields -= 0.3).toFixed(2))
+              // otherwise move asteroid forward
+              asteroid.progress = asteroid.progress + 0.10; 
+              return asteroid;
             }
-            // remove asteroid by not returning it in the map
-            //setAsteroids(newAsteroids.splice(idx, 1));
-          } else {
-            // otherwise move asteroid forward
-            asteroid.progress = asteroid.progress + 0.10; 
-            return asteroid;
-          }
+          })
+          return nextAsteroids;
         })
-        setAsteroids(nextAsteroids);
       }
     }
-  }, [gameState, asteroids, shields])
+  }, [gameState, setAsteroids, shields, setShields])
   
   // useEffect(()=> {
     
@@ -111,6 +111,8 @@ export default function Game(props) {
       <Station/>
       <Space 
         gameState={gameState}
+        asteroids={asteroids}
+        focused={focused}
         newGame={newGame}
       />
     </StyledDiv>

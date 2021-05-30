@@ -1,14 +1,21 @@
 import styled from 'styled-components';
+import Lane from '../Lane';
 
 const StyledDiv = styled.div`
   width: 70%;
-  background: none;
+  /* display: flex;
+  flex-direction: column;
+  height: 90vh;
+  overflow: hidden;
+  justify-content: space-evenly;
+  position: relative; */
 `;
 
 const StatusScreen = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 5;
   padding: 30px;
   position: absolute;
   left: 50%;
@@ -34,7 +41,9 @@ const StatusScreen = styled.div`
 `;
 
 export default function Space(props) {
-
+  const lane0 = props.asteroids.filter(a => a.lane === 0);
+  const lane1 = props.asteroids.filter(a => a.lane === 1);
+  const lane2 = props.asteroids.filter(a => a.lane === 2);
   return(
     <StyledDiv>
       {(props.gameState==="startNewGame")? 
@@ -49,6 +58,23 @@ export default function Space(props) {
           <button onClick={props.newGame}>Start New Game</button>
         </StatusScreen>
       )}
+
+      <Lane
+        asteroids={lane0} 
+        focused={props.focused}
+        key={0}
+      />
+      <Lane
+        asteroids={lane1} 
+        focused={props.focused}
+        key={1}
+      />
+      <Lane
+        asteroids={lane2} 
+        focused={props.focused}
+        key={2}
+      />
+
     </StyledDiv>
   )
 }
