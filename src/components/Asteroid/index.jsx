@@ -13,7 +13,11 @@ const StyledDiv = styled.div`
 
 export default function Asteroid(props) {
   return(
-    <StyledDiv>
+    <StyledDiv style={{
+      right: props.progress,
+      marginTop: props.margin,
+      zIndex: 5
+    }}>
       <Question
         question={props.question}
       />
